@@ -1,0 +1,50 @@
+* サポートページ
+  https://book.mynavi.jp/support/pc/5295/
+ 
+* 入力
+
+#+begin_src python
+#  N個の数値の読み取り
+n = int(input())
+c = input().split()
+#+end_src
+
+* 出力
+
+* リスト
+
+#+begin_src python
+# 宣言
+list = []
+
+# 挿入
+list.append(1)
+
+# 取り出し
+b = list.pop()
+#+end_src
+
+** キュー(LIFO)
+
+#+begin_src python
+from collections import deque
+
+# 宣言
+queue = deque()
+
+# エンキュー
+queue.append(1)
+
+# デキュー
+queue.popleft()
+#+end_src
+
+* 無限大
+
+#+begin_src python
+# +無限大
+float("inf")
+
+# -無限大
+-float("inf")
+#+end_src
