@@ -1,27 +1,51 @@
 * サポートページ
-  https://book.mynavi.jp/support/pc/5295/
+  - https://book.mynavi.jp/support/pc/5295/
  
 * 入力
 
 #+begin_src python
 #  N個の数値の読み取り
 n = int(input())
-c = input().split()
+A = list(map(int, input().split()))
+
+# 縦に長い数値の読み込み
+a = []
+for i in range(n):
+    a.append(int(input()))
 #+end_src
 
 * 出力
 
-* リスト
+#+begin_src python
+# N個の数値の書き出し
+print(" ".join(map(str, A)))
+
+# 縦に長い数値の書き出し
+print("\n".join(map(str, A)))
+#+end_src
+
+* データ構造
+** リスト
 
 #+begin_src python
 # 宣言
-list = []
+l = []
+
+len(l)     # 長さ
+sum(l)     # 総和
+min(l)     # 最小値を返す
+max(l)     # 最大値を返す
 
 # 挿入
-list.append(1)
+l.append(1)
+l += [1]
 
 # 取り出し
-b = list.pop()
+b = l.pop()
+
+# ソート
+l.sort()
+l.reverse()
 #+end_src
 
 ** キュー(LIFO)
@@ -37,6 +61,34 @@ queue.append(1)
 
 # デキュー
 queue.popleft()
+#+end_src
+
+** set
+
+#+begin_src python
+# 宣言
+s = set()
+
+# 挿入
+s.add(a)
+
+# 存在するか？
+if 1 in s:
+  # hogehoge
+#+end_src
+
+** ディクショナリ
+
+#+begin_src python
+# 宣言
+m = {}
+
+# 挿入
+m[1] = 2
+
+# 存在するか？
+if 1 in m:
+  # hogehoge
 #+end_src
 
 * 無限大
