@@ -24,12 +24,56 @@ print(" ".join(map(str, A)))
 print("\n".join(map(str, A)))
 #+end_src
 
+* 制御文
+** range
+
+#+begin_src python
+range(5) #=> 0 から 5
+range(1, 5) #=> 1 から 4
+#+end_src
+
+** for
+
+#+begin_src python
+# n 回ループする
+for _ in range(n):
+  pass
+
+# 複数のシーケンスオブジェクトを同時にループするときに使用.
+for x, y in zip(X, Y):
+  #....
+
+#+end_src
+
 * データ構造
-** リスト
+** 文字列
+
+#+begin_src python
+# 宣言
+s = "abc"
+
+# 結合
+s += "d"
+
+# 長さを求める
+len(s)
+
+# 一文字ずつ処理
+for c in s:
+  print(c)
+#+end_src
+
+** リスト(配列)
 
 #+begin_src python
 # 宣言
 l = []
+l = list()
+
+# 初期化
+l = [False] * 100
+dp = [0 for i in range(n)]
+
 
 len(l)     # 長さ
 sum(l)     # 総和
@@ -41,7 +85,10 @@ l.append(1)
 l += [1]
 
 # 取り出し
-b = l.pop()
+b = l.pop() # 末尾を削除
+l.pop(0) # 先頭を削除
+
+del l[0] # 先頭を削除
 
 # ソート
 l.sort()
@@ -49,6 +96,9 @@ l.reverse()
 #+end_src
 
 ** キュー(LIFO)
+   リストをキューとして利用することはできるけれども、
+   それより collections.deque を利用したほうが高速.
+   - http://docs.python.jp/2/tutorial/datastructures.html
 
 #+begin_src python
 from collections import deque
@@ -82,6 +132,7 @@ if 1 in s:
 #+begin_src python
 # 宣言
 m = {}
+m = dict()
 
 # 挿入
 m[1] = 2
@@ -91,12 +142,84 @@ if 1 in m:
   # hogehoge
 #+end_src
 
-* 無限大
+** 優先度つきキュー
 
 #+begin_src python
+import heapq
+# 宣言
+q = []
+
+heapq.heappush(q, 1) # 1を挿入
+heapq.heappush(q, 2) # 2を挿入
+
+a = heapq.heappop(q) # 取り出し
+#+end_src
+
+* 探索
+** 深さ優先探索
+
+#+begin_src python
+def dfs(now):
+    if "nowが終了条件":
+        return "nowの答え"
+
+    ret = -1
+    for i in range("次の状態の個数"):
+        next = "i番目の次の状態"
+        if "nextが条件を満たしている":
+            ret = max(dfs(next), ret)
+    return ret
+#+end_src
+
+** 幅優先探索
+
+#+begin_src python
+queue = []
+queue.append("初期状態")
+while len(queue) > 0:
+    # 取り出し
+    now = queue[0]
+    del queue[0]
+    # now に対しての処理
+    for i in range("次の状態の個数"):
+        next = "i番目の次の状態"
+        if "nextが訪問済みであるかどうかの判定":
+            queue.append(next)
+#+end_src
+
+* その他
+
+#+begin_src python
+ans = max(ans, cnt) # 大きい方をえらぶ
+ans = min(ans, cnt) # 小さい方をえらぶ
+
 # +無限大
 float("inf")
 
 # -無限大
 -float("inf")
 #+end_src
+
+** 座標
+
+#+begin_src python
+# 座標作成
+grid = [[False for i in range(100)] for j in range(100)]
+board = [[-1 for i in range(width)] for j in range(height)]
+
+# こっちでもいける
+for i in range(height):
+  list = []
+  for j in range(width):
+     list.append(-1)
+  board.append(list)
+
+# 移動量の定義
+vx = [1, -1, 0, 0]
+vy = [0, 0, 1, -1]
+#+end_src
+
+* Links
+  - [[http://kujira16.hateblo.jp/entry/2012/09/30/130810][競技プログラミング用Python最速マスター - くじらにっき++]]
+  - http://nagoyacoder.web.fc2.com/topcoder/topcoder_python.html
+  - [[http://qiita.com/lethe2211/items/b91cc9e2b355ad32f1e6][Pythonで競技プログラミングする時に知っておきたいtips - Qiita]]
