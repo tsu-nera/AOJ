@@ -4,7 +4,7 @@
 * 入力
 
 #+begin_src python
-#  N個の数値の読み取り
+#  N 個の数値の読み取り
 n = int(input())
 A = list(map(int, input().split()))
 
@@ -17,7 +17,7 @@ for i in range(n):
 * 出力
 
 #+begin_src python
-# N個の数値の書き出し
+# N 個の数値の書き出し
 print(" ".join(map(str, A)))
 
 # 縦に長い数値の書き出し
@@ -45,6 +45,26 @@ for x, y in zip(X, Y):
 
 #+end_src
 
+** enumerate
+   インデックスとともにループ
+
+#+begin_src python
+for i, c in enumerate("abc"):
+  print (i, c)  # (0, 'a'), (1, 'b'),  (2, 'c')
+#+end_src
+
+** yield
+
+#+begin_src python
+def generator():
+  yield 1
+  yield 2
+  yield 3
+
+for i in generator():
+  print i # 1 ,2 ,3
+#+end_src
+
 * データ構造
 ** 文字列
 
@@ -61,6 +81,14 @@ len(s)
 # 一文字ずつ処理
 for c in s:
   print(c)
+
+# 文字を逆順にする
+s[::-1]
+
+# 数値に変換
+ord('a') 
+# 文字に変換
+chr(ord('a'))
 #+end_src
 
 ** リスト(配列)
@@ -92,8 +120,25 @@ del l[0] # 先頭を削除
 
 # ソート
 l.sort()
+sorted(l)
+
+# 逆ソート
 l.reverse()
+reversed(l)
+
+# 2 つの要素を一緒にソート
+zip(a, b).sort() # a でソート
+zip(a, b).sort(key= lambda x:x[1]) # b でソート
 #+end_src
+
+*** スライス
+    
+#+begin_src python
+str = "ABCDE"
+print str[:2] # AB
+print str[2:] # CDE
+#+end_src
+
 
 ** キュー(LIFO)
    リストをキューとして利用することはできるけれども、
@@ -124,7 +169,11 @@ s.add(a)
 
 # 存在するか？
 if 1 in s:
-  # hogehoge
+  # hoge
+
+# 部分集合か？
+if a > b:
+  #hoge
 #+end_src
 
 ** ディクショナリ
@@ -149,8 +198,8 @@ import heapq
 # 宣言
 q = []
 
-heapq.heappush(q, 1) # 1を挿入
-heapq.heappush(q, 2) # 2を挿入
+heapq.heappush(q, 1) # 1 を挿入
+heapq.heappush(q, 2) # 2 を挿入
 
 a = heapq.heappop(q) # 取り出し
 #+end_src
@@ -160,13 +209,13 @@ a = heapq.heappop(q) # 取り出し
 
 #+begin_src python
 def dfs(now):
-    if "nowが終了条件":
-        return "nowの答え"
+    if "now が終了条件":
+        return "now の答え"
 
     ret = -1
     for i in range("次の状態の個数"):
-        next = "i番目の次の状態"
-        if "nextが条件を満たしている":
+        next = "i 番目の次の状態"
+        if "next が条件を満たしている":
             ret = max(dfs(next), ret)
     return ret
 #+end_src
@@ -182,10 +231,11 @@ while len(queue) > 0:
     del queue[0]
     # now に対しての処理
     for i in range("次の状態の個数"):
-        next = "i番目の次の状態"
-        if "nextが訪問済みであるかどうかの判定":
+        next = "i 番目の次の状態"
+        if "next が訪問済みであるかどうかの判定":
             queue.append(next)
 #+end_src
+
 
 * その他
 
@@ -214,12 +264,23 @@ for i in range(height):
      list.append(-1)
   board.append(list)
 
-# 移動量の定義
+# 移動量の定義 4 方向
 vx = [1, -1, 0, 0]
 vy = [0, 0, 1, -1]
+
+for i in range(4):
+  nx = x + vx[i]
+  ny = y + vy[y]
+
+def isBound(n, m, x, y):
+    return x < 0 or y < 0 or x >= n or y >= m
+
+# 8 方向
+vx = [1, -1, 0, 0, 1, 1, -1, -1]
+vy = [0, 0, 1, -1, 1, -1, 1, -1]
 #+end_src
 
 * Links
-  - [[http://kujira16.hateblo.jp/entry/2012/09/30/130810][競技プログラミング用Python最速マスター - くじらにっき++]]
+  - [[http://kujira16.hateblo.jp/entry/2012/09/30/130810][競技プログラミング用 Python 最速マスター - くじらにっき++]]
   - http://nagoyacoder.web.fc2.com/topcoder/topcoder_python.html
-  - [[http://qiita.com/lethe2211/items/b91cc9e2b355ad32f1e6][Pythonで競技プログラミングする時に知っておきたいtips - Qiita]]
+  - [[http://qiita.com/lethe2211/items/b91cc9e2b355ad32f1e6][Python で競技プログラミングする時に知っておきたい tips - Qiita]]
